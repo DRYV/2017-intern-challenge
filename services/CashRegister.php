@@ -23,9 +23,15 @@ class CashRegister
         $amount = new Money($total, new Currency('USD'));
         return $amount;
     }
-
+	
+	/**
+	* @param Order $order
+	* @return Int
+	*/
     public function getProductTotal(Order $order)
     {
-        
+        $product = $order->product()->where('status', 'COMPLETE')->get();
+		$total = $product-> sum('quantity');
+		return $total;
     }
 }

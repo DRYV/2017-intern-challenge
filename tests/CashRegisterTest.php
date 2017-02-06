@@ -65,4 +65,13 @@ class CashRegisterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('500', $total->getAmount());
         $this->assertEquals('USD', $total->getCurrency()->getCode());
     }
+
+	public function testGetProductTotal()
+    {
+        $total = $this->cashRegister->getProductTotal($this->order);
+		echo ($total);
+
+        $this->assertEquals(\Int\Int::class, get_class($total));
+        $this->assertEquals('5', $total);
+    }
 }
