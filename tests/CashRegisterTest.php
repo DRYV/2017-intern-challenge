@@ -2,6 +2,7 @@
 
 require __DIR__  . '/../config/database.php';
 
+
 class CashRegisterTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -33,11 +34,18 @@ class CashRegisterTest extends \PHPUnit\Framework\TestCase
 
     public function testGetProductTotal()
     {
-        
+        $total1 = $this->cashRegister->getProductTotal($this->order);
+		
+		$this->assertInternalType("int", $total1);
+		$this->assertEquals(1000, $total1);
     }
 
     public function testProductTotalEqualsTransactionTotal()
     {
-        
+        $total = $this->cashRegister->getTransactionTotal($this->order);
+		$total1 = $this->cashRegister->getProductTotal($this->order);
+		$final = $total->getAmount();
+		
+		$this -> assertEquals((int)$final, $total1);
     }
 }
