@@ -28,7 +28,7 @@ class CashRegister
 	
 	/**
 	* @param Order $order
-	* @return Int
+	* @return Money
 	*/
     public function getProductTotal(Order $order)
     {
@@ -37,7 +37,8 @@ class CashRegister
 		foreach($products as $item){
 			$total+=$item->amount *$item->quantity;
 		};
-		return $total;
+        $amount = new Money($total, new Currency('USD'));
+		return $amount;
 		
     }
 }
